@@ -9,6 +9,7 @@ import {
   Space_Grotesk 
 } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // --- DEFINISI VARIABLE FONT ---
 
@@ -65,7 +66,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    // suppressHydrationWarning wajib ada untuk next-themes agar tidak error saat render HTML
+    <html lang="id" suppressHydrationWarning>
       <body
         className={`
           ${inter.variable} 
@@ -77,7 +79,14 @@ export default function RootLayout({
           antialiased
         `}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -63,33 +63,57 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
+ /* --- 1. ANIMASI METEOR (VERSI KITA: HANYA GERAK, TANPA ROTASI) --- */
+  /* Kita menghapus "rotate(var(--angle))" dari sini karena rotasi sudah 
+     diurus oleh wrapper di file meteors.tsx. Kalau double, nanti arahnya aneh. */
   --animate-meteor: meteor 5s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
   @keyframes meteor {
-  0% {
-    transform: rotate(var(--angle)) translateX(0);
-    opacity: 1;
+    0% {
+      transform: translateX(0); /* Hanya gerak lurus */
+      opacity: 1;
     }
-  70% {
-    opacity: 1;
+    70% {
+      opacity: 1;
     }
-  100% {
-    transform: rotate(var(--angle)) translateX(-500px);
-    opacity: 0;
+    100% {
+      transform: translateX(-500px); /* Meluncur sejauh 500px */
+      opacity: 0;
     }
   }
+
+  @keyframes float {
+    0%, 100% { 
+      transform: translateY(0); 
+    }
+    50% { 
+      transform: translateY(-20px); 
+    }
+  }
+
+  /* --- 2. ANIMASI MARQUEE (SIMPAN SAJA, JANGAN DIHAPUS) --- */
   --animate-marquee: marquee var(--duration) infinite linear;
-  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite
-;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
   @keyframes marquee {
-  from {
-    transform: translateX(0);}
-  to {
-    transform: translateX(calc(-100% - var(--gap)));}}
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
   @keyframes marquee-vertical {
-  from {
-    transform: translateY(0);}
-  to {
-    transform: translateY(calc(-100% - var(--gap)));}}}
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+}
 
 /* --- 3. CONFIG UTAMA (DEFAULT = DARK) --- */
 /* Isi variabel di :root ini diambil dari nilai .dark (Shadcn default),

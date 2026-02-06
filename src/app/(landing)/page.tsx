@@ -78,7 +78,7 @@ export default function LandingPage() {
           </div>
 
           {/* SUB-HEADLINE */}
-          <p className="mt-7 max-w-xl lg:max-w-2xl mx-auto font-onest text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground/80">
+          <p className="mt-7 max-w-xl lg:max-w-2xl mx-auto font-onest text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground/80 max-w-[280px] sm:max-w-[550px] text-balance lg:text-wrap">
             Where creativity meets technology. One account grants you unlimited
             access to learn, collaborate, and find your frequency in a verified
             ecosystem.

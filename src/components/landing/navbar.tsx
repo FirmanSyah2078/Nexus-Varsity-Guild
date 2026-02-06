@@ -17,11 +17,8 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md transition-all duration-500">
-      {/* PERBAIKAN:
-         1. max-w-[1400px]: Agar di layar ultrawide, logo tidak terlalu mojok ke pinggir.
-         2. px-6 md:px-10 lg:px-16: Padding disinkronkan persis dengan Hero Section di bawah.
-      */}
-      <div className="mx-auto flex h-16 w-full max-w-350 items-center justify-between px-6 md:px-10 lg:px-16 transition-all duration-500 ease-out">
+      
+      <div className=" flex h-16 w-full  items-center justify-between px-6 md:px-10 lg:px-16 transition-all duration-500 ease-out">
         
         {/* --- LOGO --- */}
         <Link href="/" className="group flex items-center gap-2">

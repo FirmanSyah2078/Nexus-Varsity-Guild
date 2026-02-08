@@ -113,6 +113,29 @@
       transform: translateY(calc(-100% - var(--gap)));
     }
   }
+
+  /* --- TAMBAHAN KHUSUS LANDING PAGE (V4 COMPATIBLE) --- */
+  
+  /* 1. Definisi Animasi Fade In Down (untuk Badge Hero) */
+  --animate-fade-in-down: fade-in-down 0.5s ease-out;
+  
+  @keyframes fade-in-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* 2. Definisi Animasi Pulse Custom (untuk Bintang) */
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  
+  /* 3. Definisi Blur Backdrop Custom (Opsional, jika ingin blur lebih kuat) */
+  --backdrop-blur-xs: 2px;
+  --backdrop-blur-xxl: 40px;
 }
 
 /* --- 3. CONFIG UTAMA (DEFAULT = DARK) --- */

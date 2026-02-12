@@ -5,17 +5,10 @@ import Image from "next/image";
 import SectionTitle from "@/components/landing/title";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Terminal, 
-  Check, 
-  Cpu, 
-  Database,
-  Play,
-  ShieldCheck,
-  Zap,
-  LayoutTemplate
+  Terminal, Check, Cpu, Database, Play, ShieldCheck, Zap, LayoutTemplate
 } from "lucide-react";
 
-// --- 1. UTILITY: SAFE SYNTAX HIGHLIGHTER ---
+// --- 1. UTILITY: SAFE SYNTAX HIGHLIGHTER (TETAP SAMA) ---
 const highlightCode = (code: string) => {
   return code
     .replace(/</g, "&lt;")
@@ -35,9 +28,7 @@ const highlightCode = (code: string) => {
     );
 };
 
-
-// --- 2. PREVIEW COMPONENTS ---
-// Output: TypeScript
+// --- 2. PREVIEW COMPONENTS (TETAP SAMA) ---
 const CommunityPreview = () => (
   <div className="flex flex-col items-center justify-center h-full w-full">
     <motion.div 
@@ -47,23 +38,13 @@ const CommunityPreview = () => (
       className="relative w-64 p-4 rounded-xl border border-indigo-500/30 bg-[#0f1115]/90 backdrop-blur-xl shadow-[0_0_30px_rgba(99,102,241,0.2)]"
     >
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-indigo-500 to-purple-500 rounded-t-xl" />
-      
-      {/* Badge Centang tetap ada di pojok */}
       <div className="absolute -top-3 -right-3 p-1.5 rounded-full bg-indigo-500 text-white shadow-[0_0_15px_#6366f1] z-10">
         <Check size={12} strokeWidth={3} />
       </div>
-
       <div className="flex items-center gap-3 mb-4 mt-1">
-        {/* --- UPDATE: Menggunakan Image Asli --- */}
         <div className="relative size-10 rounded-full overflow-hidden ring-2 ring-indigo-500/20">
-           <Image 
-             src="/images/profile2.jpg" // Pastikan file ada di folder public/images/
-             alt="Profile"
-             fill
-             className="object-cover"
-           />
+           <Image src="/images/profile2.jpg" alt="Profile" fill className="object-cover"/>
         </div>
-
         <div>
           <h4 className="font-space font-bold text-white text-sm">Anantara</h4>
           <div className="flex items-center gap-1.5 mt-0.5">
@@ -72,136 +53,75 @@ const CommunityPreview = () => (
           </div>
         </div>
       </div>
-
       <div className="space-y-2 mb-4">
         <div className="flex justify-between text-[10px] text-zinc-500 font-mono">
-           <span>CONTRIBUTIONS</span>
-           <span className="text-white">1,240</span>
+           <span>CONTRIBUTIONS</span><span className="text-white">1,240</span>
         </div>
         <div className="h-1.5 w-full rounded-full bg-white/5 overflow-hidden">
-           <motion.div 
-             initial={{ width: 0 }}
-             animate={{ width: "75%" }}
-             transition={{ delay: 0.5, duration: 1 }}
-             className="h-full bg-indigo-500" 
-           />
+           <motion.div initial={{ width: 0 }} animate={{ width: "75%" }} transition={{ delay: 0.5, duration: 1 }} className="h-full bg-indigo-500" />
         </div>
       </div>
-
       <div className="flex gap-1.5 flex-wrap">
         {["React", "Next.js", "UI"].map((tag) => (
-          <span key={tag} className="text-[10px] text-indigo-200 font-mono bg-indigo-500/10 border border-indigo-500/20 px-1.5 py-0.5 rounded">
-            {tag}
-          </span>
+          <span key={tag} className="text-[10px] text-indigo-200 font-mono bg-indigo-500/10 border border-indigo-500/20 px-1.5 py-0.5 rounded">{tag}</span>
         ))}
       </div>
     </motion.div>
   </div>
 );
 
-// Output: Python
 const PythonPreview = () => (
   <div className="flex flex-col items-center justify-center h-full w-full relative py-4">
     <div className="relative size-40 md:size-48 flex items-center justify-center mb-4">
-       <motion.div 
-          animate={{ rotate: 360 }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 rounded-full border border-yellow-500/10 border-t-yellow-500/60 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(234,179,8,0.1)_360deg)]"
-       />
+       <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} className="absolute inset-0 rounded-full border border-yellow-500/10 border-t-yellow-500/60 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(234,179,8,0.1)_360deg)]" />
        <div className="absolute inset-4 rounded-full border border-dashed border-yellow-500/20" />
        <div className="absolute inset-12 rounded-full border border-yellow-500/10" />
-       
        <div className="relative z-10 flex flex-col items-center text-center">
           <ShieldCheck className="size-8 text-yellow-400 mb-2 drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]" />
           <h4 className="font-space font-bold text-yellow-100 text-sm">Sentinel System</h4>
        </div>
     </div>
-    
     <div className="w-48 p-3 bg-[#0d1117]/80 backdrop-blur-md rounded border border-yellow-500/20 shadow-[0_0_15px_rgba(234,179,8,0.1)]">
        <div className="flex justify-between text-[10px] font-mono text-zinc-400 mb-1.5">
-          <span>THREAT_LEVEL</span>
-          <span className="text-emerald-400 font-bold">LOW (0.02)</span>
+          <span>THREAT_LEVEL</span><span className="text-emerald-400 font-bold">LOW (0.02)</span>
        </div>
        <div className="flex gap-0.5 h-1.5 w-full">
-          {[1,2,3,4,5,6,7,8].map(i => (
-             <div key={i} className={`h-full w-full rounded-full ${i < 2 ? 'bg-emerald-500' : 'bg-white/10'}`} />
-          ))}
+          {[1,2,3,4,5,6,7,8].map(i => (<div key={i} className={`h-full w-full rounded-full ${i < 2 ? 'bg-emerald-500' : 'bg-white/10'}`} />))}
        </div>
-       <div className="mt-2 text-[8px] font-mono text-yellow-500/60 text-center">
-          &gt; SYSTEM SECURE
-       </div>
+       <div className="mt-2 text-[8px] font-mono text-yellow-500/60 text-center">&gt; SYSTEM SECURE</div>
     </div>
   </div>
 );
 
-// Output: Rust
 const RustPreview = () => (
   <div className="flex flex-col items-center justify-center h-full w-full p-4">
     <div className="w-full max-w-70 rounded-xl border border-orange-500/20 bg-[#0f1115]/90 backdrop-blur-xl shadow-[0_0_30px_rgba(249,115,22,0.1)] overflow-hidden">
-      
       <div className="flex items-center justify-between p-4 pb-2">
-        <span className="flex items-center gap-2 font-mono text-xs text-orange-400 font-bold">
-          <Zap size={14} fill="currentColor" /> CORE_ENGINE
-        </span>
-        <div className="flex gap-1.5 items-center">
-           <span className="text-[10px] text-zinc-500 font-mono">LIVE</span>
-           <div className="size-1.5 rounded-full bg-orange-500 animate-pulse" />
-        </div>
+        <span className="flex items-center gap-2 font-mono text-xs text-orange-400 font-bold"><Zap size={14} fill="currentColor" /> CORE_ENGINE</span>
+        <div className="flex gap-1.5 items-center"><span className="text-[10px] text-zinc-500 font-mono">LIVE</span><div className="size-1.5 rounded-full bg-orange-500 animate-pulse" /></div>
       </div>
-      
       <div className="relative h-24 w-full px-4 flex items-end justify-between gap-1 mb-4">
         <div className="absolute inset-0 px-4 flex flex-col justify-between py-2 pointer-events-none opacity-20">
-           <div className="w-full h-px bg-orange-500/30 dashed" />
-           <div className="w-full h-px bg-orange-500/30 dashed" />
-           <div className="w-full h-px bg-orange-500/30 dashed" />
+           <div className="w-full h-px bg-orange-500/30 dashed" /><div className="w-full h-px bg-orange-500/30 dashed" /><div className="w-full h-px bg-orange-500/30 dashed" />
         </div>
-
         {[40, 70, 45, 90, 60, 80, 50, 95, 30, 65, 85, 55].map((h, i) => (
-          <motion.div
-            key={i}
-            initial={{ height: "10%" }}
-            animate={{ height: `${h}%` }}
-            transition={{ 
-              repeat: Infinity, 
-              repeatType: "reverse", 
-              duration: 1 + (i % 4) * 0.2,
-              delay: i * 0.05 
-            }}
-            className="w-full bg-orange-500/80 rounded-t-[1px] shadow-[0_0_10px_#f97316]"
-          />
+          <motion.div key={i} initial={{ height: "10%" }} animate={{ height: `${h}%` }} transition={{ repeat: Infinity, repeatType: "reverse", duration: 1 + (i % 4) * 0.2, delay: i * 0.05 }} className="w-full bg-orange-500/80 rounded-t-[1px] shadow-[0_0_10px_#f97316]" />
         ))}
       </div>
-
       <div className="grid grid-cols-2 gap-2 px-4 mb-4">
-         <div className="p-2 bg-orange-500/5 rounded border border-orange-500/10">
-            <span className="block text-[8px] text-zinc-500 font-mono">LATENCY</span>
-            <span className="block text-xs text-white font-bold font-mono">4.2ms</span>
-         </div>
-         <div className="p-2 bg-orange-500/5 rounded border border-orange-500/10">
-            <span className="block text-[8px] text-zinc-500 font-mono">MEMORY</span>
-            <span className="block text-xs text-white font-bold font-mono">12MB</span>
-         </div>
+         <div className="p-2 bg-orange-500/5 rounded border border-orange-500/10"><span className="block text-[8px] text-zinc-500 font-mono">LATENCY</span><span className="block text-xs text-white font-bold font-mono">4.2ms</span></div>
+         <div className="p-2 bg-orange-500/5 rounded border border-orange-500/10"><span className="block text-[8px] text-zinc-500 font-mono">MEMORY</span><span className="block text-xs text-white font-bold font-mono">12MB</span></div>
       </div>
-
       <div className="bg-black/40 border-t border-white/5 p-3 font-mono text-[9px] leading-relaxed text-zinc-400">
-         <div className="flex gap-2">
-            <span className="text-zinc-600">$</span>
-            <span>cargo run --release</span>
-         </div>
-         <div className="text-orange-300 mt-1">
-            &gt; 🚀 Nexus Engine v2.0 Ignite...
-         </div>
-         <div className="text-emerald-400">
-            &gt; Server listening on 127.0.0.1:8080
-         </div>
+         <div className="flex gap-2"><span className="text-zinc-600">$</span><span>cargo run --release</span></div>
+         <div className="text-orange-300 mt-1">&gt; 🚀 Nexus Engine v2.0 Ignite...</div>
+         <div className="text-emerald-400">&gt; Server listening on 127.0.0.1:8080</div>
       </div>
-
     </div>
   </div>
 );
 
-
-// --- 3. DATA SNIPPETS ---
+// --- 3. DATA SNIPPETS (TETAP SAMA) ---
 const CODE_SNIPPETS = [
   {
     id: "typescript",
@@ -318,7 +238,10 @@ export default function CodeShowcaseSection() {
   const ActivePreview = activeCode.preview;
 
   return (
-    <section className="relative flex w-full min-h-screen flex-col items-center justify-center py-5 z-10 px-4 sm:px-6">
+    // REVISI LAYOUT:
+    // 1. Hapus min-h-screen -> Ganti py-24.
+    // 2. Padding Pixels: px-4 md:px-16 lg:px-24 xl:px-32.
+    <section className="relative flex w-full flex-col items-center justify-center py-24 z-10 px-4 md:px-16 lg:px-24 xl:px-32">
 
       {/* HEADER */}
       <SectionTitle
@@ -368,7 +291,7 @@ export default function CodeShowcaseSection() {
              ))}
           </div>
 
-          {/* Editor Content (SAFE HIGHLIGHTING HERE) */}
+          {/* Editor Content */}
           <div className="relative flex-1 p-4 md:p-6 font-mono text-[10px] md:text-sm overflow-x-auto lg:min-h-111.25
             [&::-webkit-scrollbar]:w-1.5
             [&::-webkit-scrollbar]:h-1.5

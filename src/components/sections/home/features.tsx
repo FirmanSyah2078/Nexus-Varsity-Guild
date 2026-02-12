@@ -1,20 +1,12 @@
-// src/components/sections/home/features.tsx
-
 "use client";
 import React, { useState } from "react";
 import SectionTitle from "@/components/landing/title";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import {
-  LayoutGrid, // Icon Header
-  Layers, // Icon All
-  Users, // Icon Assembly
-  Hammer, // Icon Forge
-  Zap, // Icon Fusion
-  ShieldCheck, // Icon Stability
-  ChevronLeft,
-  ChevronRight,
+  LayoutGrid, Layers, Users, Hammer, Zap, ShieldCheck, ChevronLeft, ChevronRight,
 } from "lucide-react";
 
+// ... [BAGIAN DATA FEATURES & TABS TETAP SAMA, JANGAN DIUBAH] ...
 const FEATURES = [
   // ASSEMBLY (Social)
   {
@@ -45,7 +37,6 @@ const FEATURES = [
     desc: "Weekly features showcasing active community members.",
     icon: Users,
   },
-
   // FORGE (Dev)
   {
     id: 5,
@@ -81,8 +72,7 @@ const FEATURES = [
     title: "Dev Log",
     desc: "Track your progress and share daily updates.",
     icon: Hammer,
-  }, // Extra item untuk test page 2
-
+  },
   // FUSION (Fun)
   {
     id: 10,
@@ -105,7 +95,6 @@ const FEATURES = [
     desc: "Scheduled streaming events for community watch parties.",
     icon: Zap,
   },
-
   // STABILITY (System)
   {
     id: 13,
@@ -138,7 +127,7 @@ const TABS = [
   { id: "Stability", label: "Stability", icon: ShieldCheck },
 ];
 
-// --- VARIANTS ANIMASI ---
+
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -158,56 +147,20 @@ const containerVariants: Variants = {
 };
 
 const cardVariants: Variants = {
-  hidden: {
-    y: 30, // Jarak dari bawah sedikit ditambah biar 'naik'-nya kerasa
-    opacity: 0,
-    scale: 0.95, // Skala awal
-  },
-  visible: {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: "tween", // GANTI SPRING JADI TWEEN (Linear/Halus)
-      ease: "easeOut", // Melambat di akhir (Sangat smooth)
-      duration: 0.5, // Durasi pas, tidak terlalu cepat, tidak lambat
-    },
-  },
-  exit: {
-    y: -20, // Hilang ke atas sedikit
-    opacity: 0,
-    scale: 0.95,
-    transition: {
-      duration: 0.3,
-      ease: "easeIn", // Mempercepat saat menghilang
-    },
-  },
+  hidden: { y: 30, opacity: 0, scale: 0.95 },
+  visible: { y: 0, opacity: 1, scale: 1, transition: { type: "tween", ease: "easeOut", duration: 0.5 } },
+  exit: { y: -20, opacity: 0, scale: 0.95, transition: { duration: 0.3, ease: "easeIn" } },
 };
 
 export default function FeaturesSection() {
-  // --- STATE SECTION 3 ---
   const [activeTab, setActiveTab] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-
-  // Constants
   const ITEMS_PER_PAGE = 8;
 
-  // 1. Filter Data
-  const filteredFeatures =
-    activeTab === "All"
-      ? FEATURES
-      : FEATURES.filter((f) => f.category === activeTab);
-
-  // 2. Hitung Total Halaman
+  const filteredFeatures = activeTab === "All" ? FEATURES : FEATURES.filter((f) => f.category === activeTab);
   const totalPages = Math.ceil(filteredFeatures.length / ITEMS_PER_PAGE);
+  const currentFeatures = filteredFeatures.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
-  // 3. Potong Data untuk Halaman Saat Ini
-  const currentFeatures = filteredFeatures.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE,
-  );
-
-  // 4. Fungsi Pindah Halaman (Fix: Tambahkan tipe ': number')
   const goToPage = (pageNumber: number) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
@@ -215,7 +168,10 @@ export default function FeaturesSection() {
   };
 
   return (
-    <section className="relative flex w-full min-h-screen flex-col items-center justify-center py-32 z-10 px-4 sm:px-6">
+    // REVISI LAYOUT:
+    // 1. Hapus min-h-screen -> Ganti py-24.
+    // 2. Padding Pixels: px-4 md:px-16 lg:px-24 xl:px-32.
+    <section className="relative flex w-full flex-col items-center justify-center py-24 z-10 px-4 md:px-16 lg:px-24 xl:px-32">
 
       {/* HEADER SECTION */}
       <SectionTitle
@@ -236,7 +192,7 @@ export default function FeaturesSection() {
               key={tab.id}
               onClick={() => {
                 setActiveTab(tab.id);
-                setCurrentPage(1); // RESET HALAMAN LANGSUNG DISINI
+                setCurrentPage(1);
               }}
               className={`
                   relative group flex items-center justify-center
@@ -249,10 +205,7 @@ export default function FeaturesSection() {
                 `}
             >
               <div
-                className={`
-                  flex items-center overflow-hidden transition-all duration-300 ease-out 
-                  ${isActive ? "w-auto opacity-100 mr-2" : "w-0 opacity-0 group-hover:w-auto group-hover:opacity-100 group-hover:mr-2"}
-                `}
+                className={`flex items-center overflow-hidden transition-all duration-300 ease-out ${isActive ? "w-auto opacity-100 mr-2" : "w-0 opacity-0 group-hover:w-auto group-hover:opacity-100 group-hover:mr-2"}`}
               >
                 <Icon className="size-3.5 md:size-4" />
               </div>
@@ -301,14 +254,13 @@ export default function FeaturesSection() {
           </motion.div>
         </AnimatePresence>
 
-        {/* PAGINATION (Dot-Line System) */}
+        {/* PAGINATION */}
         {totalPages > 1 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="mt-10 flex items-center justify-center gap-3"
           >
-            {/* Tombol Prev */}
             <button
               onClick={() => goToPage(currentPage - 1)}
               disabled={currentPage === 1}
@@ -317,12 +269,10 @@ export default function FeaturesSection() {
               <ChevronLeft size={20} />
             </button>
 
-            {/* DOT & LINE INDICATORS */}
             <div className="flex items-center gap-2">
               {Array.from({ length: totalPages }).map((_, index) => {
                 const pageNumber = index + 1;
                 const isActive = pageNumber === currentPage;
-
                 return (
                   <button
                     key={pageNumber}
@@ -330,17 +280,12 @@ export default function FeaturesSection() {
                     className="relative flex items-center justify-center h-4 outline-none group/dot"
                   >
                     <motion.div
-                      // HAPUS layoutId="paginationIndicator" AGAR TIDAK KONFLIK
                       initial={false}
                       animate={{
-                        width: isActive ? 32 : 6,           // Aktif: 32px (Garis), Tidak: 6px (Titik)
-                        backgroundColor: isActive ? "#6366f1" : "#52525b", // Indigo vs Zinc
+                        width: isActive ? 32 : 6,
+                        backgroundColor: isActive ? "#6366f1" : "#52525b",
                       }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 30,
-                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
                       className="h-1.5 rounded-full group-hover/dot:bg-zinc-400 transition-colors"
                     />
                   </button>
@@ -348,7 +293,6 @@ export default function FeaturesSection() {
               })}
             </div>
 
-            {/* Tombol Next */}
             <button
               onClick={() => goToPage(currentPage + 1)}
               disabled={currentPage === totalPages}

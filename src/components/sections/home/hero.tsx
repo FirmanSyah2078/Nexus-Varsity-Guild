@@ -1,5 +1,3 @@
-// src/components/sections/home/Hero.tsx
-
 "use client"; 
 
 import Link from "next/link";
@@ -10,15 +8,18 @@ import { Button } from "@/components/ui/button";
 
 export default function HeroSection() {
   return (
-    <section className="relative flex w-full h-[calc(100vh-64px)] min-h-170 flex-col items-center justify-center overflow-hidden z-10">
-      {/* HAPUS BACKGROUND DISINI, DIGANTI DENGAN GIANT NEBULA DI ATAS */}
-
-      {/* Meteor Tetap Ada */}
+    // FIX LAYOUT HERO (SPESIAL):
+    // 1. pt-20 md:pt-32: INI KUNCINYA. Kita dorong konten ke bawah secara manual biar visualnya pas di tengah mata.
+    // 2. min-h-[calc(100vh-64px)]: Tinggi minimal selayar (minus navbar).
+    // 3. px-4 md:px-16... : Padding samping tetap pakai standar Pro agar batas kirinya lurus dengan section bawah.
+    <section className="relative flex w-full min-h-[calc(100vh-64px)] flex-col items-center justify-center overflow-hidden z-10 px-4 md:px-16 lg:px-24 xl:px-32 pt-20 md:pt-32 pb-10">
+      
+      {/* Meteor (Background) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <Meteors number={20} />
       </div>
 
-      {/* Planet & Astronaut (Tetap Ada) */}
+      {/* Planet & Astronaut (Background Animation) */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-10">
         <div className="hidden md:block absolute left-0 top-[65%] -translate-y-1/2 -translate-x-[20%] w-50 lg:w-70 xl:w-87.5 opacity-90 transition-all duration-1000 ease-out">
           <div className="animate-float">
@@ -32,19 +33,20 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Text Content (Tetap Ada) */}
-      {/* Container Utama: Ditambah px-4 sm:px-6 agar di HP tidak mepet pinggir */}
-      <div className="relative z-20 flex flex-col items-center text-center px-4 sm:px-6 md:px-10 w-full max-w-5xl mx-auto">
-        {/* --- BADGE --- */}
+      {/* CONTENT WRAPPER */}
+      {/* max-w-5xl: Agar konten tidak terlalu melebar (Pecah) saat di-zoom out */}
+      <div className="relative z-20 flex flex-col items-center text-center w-full max-w-5xl mx-auto">
+        
+        {/* BADGE */}
         <div className="mb-6 sm:mb-8 inline-flex items-center rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-medium text-indigo-400 backdrop-blur-md shadow-[0_0_15px_rgba(99,102,241,0.3)] animate-fade-in-down">
           <Rocket className="mr-2 size-3 sm:size-3.5" />
           <span>Future Ready v1.0</span>
         </div>
 
-        {/* --- HEADLINE WRAPPER --- */}
-        {/* Kita batasi max-width-nya agar di layar ultra-wide tidak terlalu panjang */}
-        <div className="flex flex-col gap-3 w-full max-w-5xl mx-auto">
-          <h2 className="font-space font-extrabold tracking-tight leading-[1.1] text-2xl sm:text-3xl md:text-4xl lg:text-5xl bg-linear-to-r from-white via-indigo-100 to-indigo-200 bg-clip-text text-transparent drop-shadow-sm transition-all duration-700">
+        {/* HEADLINE */}
+        <div className="flex flex-col gap-3 w-full">
+          {/* FONT ORIGINAL: font-bold (pas), ukuran text-2xl s/d 5xl (tidak kegedean) */}
+          <h2 className="font-space font-bold leading-[1.1] text-2xl sm:text-3xl md:text-4xl lg:text-5xl bg-linear-to-r from-white via-indigo-100 to-indigo-200 bg-clip-text text-transparent drop-shadow-sm transition-all duration-700">
             Technology Weaves Your Wildest Dreams
           </h2>
           <h3 className="font-space font-bold tracking-wide leading-tight text-xl sm:text-2xl md:text-3xl lg:text-4xl text-muted-foreground/90 transition-all duration-700">
@@ -52,10 +54,8 @@ export default function HeroSection() {
           </h3>
         </div>
 
-        {/* --- PARAGRAPH WRAPPER (PERBAIKAN UTAMA) --- */}
-        {/* 1. Dibungkus DIV agar lebar bisa dikontrol terpisah dari headline */}
-        {/* 2. max-w-2xl: Agar paragraf lebih sempit dari headline (Estetik) */}
-        {/* 3. mx-auto: Agar tetap di tengah */}
+        {/* PARAGRAPH */}
+        {/* max-w-3xl: Memberikan ruang napas yang enak dibaca */}
         <div className="w-full max-w-lg sm:max-w-3xl mx-auto mt-6 sm:mt-8">
           <p className="font-onest text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground/80 text-balance">
             Where creativity meets technology. One account grants you unlimited
@@ -64,12 +64,8 @@ export default function HeroSection() {
           </p>
         </div>
 
-        {/* --- BUTTONS WRAPPER --- */}
-        {/* mt-8 sm:mt-10: Jarak responsif */}
-        {/* w-full sm:w-auto: Di HP full width container, di PC menyesuaikan isi */}
-        {/* --- BUTTONS WRAPPER --- */}
+        {/* BUTTONS */}
         <div className="mt-8 sm:mt-10 flex flex-row gap-3 items-center justify-center w-full transition-all duration-500">
-          {/* TOMBOL 1: SIGN UP */}
           <Link href="/signup" className="w-auto">
             <Button
               variant="outline"
@@ -81,7 +77,6 @@ export default function HeroSection() {
             </Button>
           </Link>
 
-          {/* TOMBOL 2: DISCORD INVITE */}
           <Link
             href="https://discord.gg/link-invite-kamu"
             target="_blank"

@@ -8,11 +8,11 @@ export default function NotFound() {
       
       {/* --- BACKGROUND EFFECTS --- */}
       
-      {/* 1. Grid Pattern (Sci-fi Tech Look) */}
+      {/* 1. Grid Pattern */}
       <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
       
-      {/* 2. Glowing Orb (Pulsing Animation) */}
-      <div className="absolute top-1/2 left-1/2 -z-10 h-75 w-75 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/20 blur-[100px] animate-pulse md:h-125 md:w-125"></div>
+      {/* 2. Glowing Orb (Fixed sizes to valid Tailwind classes) */}
+      <div className="absolute top-1/2 left-1/2 -z-10 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/20 blur-[100px] animate-pulse md:h-96 md:w-96"></div>
 
       {/* --- CONTENT --- */}
       <div className="relative z-10 flex flex-col items-center text-center px-4">
@@ -22,7 +22,7 @@ export default function NotFound() {
           <WifiOff className="size-12 text-indigo-500 animate-pulse" />
         </div>
 
-        {/* 404 BIG TEXT */}
+        {/* 404 BIG TEXT (Fixed gradient class) */}
         <h1 className="font-space text-8xl font-bold tracking-tighter sm:text-9xl bg-linear-to-b from-foreground to-foreground/20 bg-clip-text text-transparent select-none">
           404
         </h1>
@@ -50,7 +50,7 @@ export default function NotFound() {
 
       </div>
 
-      {/* --- DECORATIVE FOOTER (Futuristic Status) --- */}
+      {/* --- DECORATIVE FOOTER --- */}
       <div className="absolute bottom-8 text-xs font-mono text-muted-foreground/50 tracking-widest uppercase">
         System_Error_Code: V0ID_NULL_PTR
       </div>

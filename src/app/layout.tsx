@@ -57,7 +57,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Nexus Varsity Guild",
-  description: "Sistem Validasi Terintegrasi HIMA TI",
+  description: "Sistem Validasi Terintegrasi TI",
 };
 
 export default function RootLayout({

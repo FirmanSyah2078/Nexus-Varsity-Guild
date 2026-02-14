@@ -37,7 +37,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Variabel Sidebar yang Tadi Hilang */
+  /* Variabel Sidebar */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -47,14 +47,14 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Variabel Chart yang Tadi Hilang */
+  /* Variabel Chart */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  /* Variabel Radius Lengkap (sm s/d 4xl) */
+  /* Variabel Radius Lengkap */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -63,94 +63,67 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
- /* --- 1. ANIMASI METEOR (VERSI KITA: HANYA GERAK, TANPA ROTASI) --- */
-  /* Kita menghapus "rotate(var(--angle))" dari sini karena rotasi sudah 
-     diurus oleh wrapper di file meteors.tsx. Kalau double, nanti arahnya aneh. */
-  --animate-meteor: meteor 5s linear infinite;
-  --animate-float: float 6s ease-in-out infinite;
-
-  @keyframes meteor {
-    0% {
-      transform: translateX(0); /* Hanya gerak lurus */
-      opacity: 1;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(-500px); /* Meluncur sejauh 500px */
-      opacity: 0;
-    }
-  }
-
-  @keyframes float {
-    0%, 100% { 
-      transform: translateY(0); 
-    }
-    50% { 
-      transform: translateY(-20px); 
-    }
-  }
-
-  /* --- 2. ANIMASI MARQUEE (SIMPAN SAJA, JANGAN DIHAPUS) --- */
-  --animate-marquee: marquee var(--duration) infinite linear;
-  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
-
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(calc(-100% - var(--gap)));
-    }
-  }
-
-  @keyframes marquee-vertical {
-    from {
-      transform: translateY(0);
-    }
-    to {
-      transform: translateY(calc(-100% - var(--gap)));
-    }
-  }
-
-  /* --- TAMBAHAN KHUSUS LANDING PAGE (V4 COMPATIBLE) --- */
-  
-  /* 1. Definisi Animasi Fade In Down (untuk Badge Hero) */
-  --animate-fade-in-down: fade-in-down 0.5s ease-out;
-  
-  @keyframes fade-in-down {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* 2. Definisi Animasi Pulse Custom (untuk Bintang) */
-  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  
-  /* 3. Definisi Blur Backdrop Custom (Opsional, jika ingin blur lebih kuat) */
+  /* 3. Definisi Blur Backdrop Custom */
   --backdrop-blur-xs: 2px;
   --backdrop-blur-xxl: 40px;
+
+  /* --- 4. ANIMASI CUSTOM --- */
+  
+  /* Meteor */
+  --animate-meteor: meteor 5s linear infinite;
+  @keyframes meteor {
+    0% { transform: translateX(0); opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: translateX(-500px); opacity: 0; }
+  }
+
+  /* Float */
+  --animate-float: float 6s ease-in-out infinite;
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* Marquee */
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - var(--gap))); }
+  }
+  @keyframes marquee-vertical {
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(-100% - var(--gap))); }
+  }
+
+  /* Fade In Down */
+  --animate-fade-in-down: fade-in-down 0.5s ease-out;
+  @keyframes fade-in-down {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Pulse Slow */
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  /* Twinkle (Footer Stars) */
+  --animate-twinkle: twinkle 4s ease-in-out infinite;
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
 }
 
 /* --- 3. CONFIG UTAMA (DEFAULT = DARK) --- */
-/* Isi variabel di :root ini diambil dari nilai .dark (Shadcn default),
-   supaya Landing Page otomatis Gelap tanpa class tambahan.
-*/
 :root {
   --radius: 0.625rem;
 
   /* BASE DARK VALUES */
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);     /* Shadcn dark card */
+  --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);  /* Shadcn dark popover */
+  --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.985 0 0);
   --primary-foreground: oklch(0.205 0 0);
@@ -162,7 +135,7 @@
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);   /* Shadcn dark border */
+  --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
   --ring: oklch(0.439 0 0);
 
@@ -174,7 +147,7 @@
   --chart-5: oklch(0.645 0.246 16.439);
 
   /* SIDEBAR DARK VALUES */
-  --sidebar: oklch(0.145 0 0); /* Samakan dengan background dark */
+  --sidebar: oklch(0.145 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
@@ -185,7 +158,6 @@
 }
 
 /* --- 4. LIGHT THEME OVERRIDE --- */
-/* Hanya aktif jika ada class="light" */
 .light {
   /* BASE LIGHT VALUES */
   --background: oklch(1 0 0);
@@ -228,13 +200,13 @@
 
 /* --- 5. FUTURE DASHBOARD THEMES --- */
 .theme-blue {
-  --primary: oklch(0.488 0.243 264.376); /* Biru */
+  --primary: oklch(0.488 0.243 264.376);
   --primary-foreground: oklch(0.985 0 0);
   --ring: oklch(0.488 0.243 264.376);
 }
 
 .theme-rose {
-  --primary: oklch(0.645 0.246 16.439); /* Merah Mawar */
+  --primary: oklch(0.645 0.246 16.439);
   --primary-foreground: oklch(0.985 0 0);
   --ring: oklch(0.645 0.246 16.439);
 }

@@ -4,9 +4,6 @@ import { Cpu, Waypoints, Users, } from "lucide-react";
 
 export default function EcosystemSection() {
   return (
-    // REVISI LAYOUT:
-    // 1. Hapus min-h-screen -> Ganti py-24.
-    // 2. Padding Pixels: px-4 md:px-16 lg:px-24 xl:px-32.
     <section className="relative flex w-full flex-col items-center justify-center py-24 z-10 px-4 md:px-16 lg:px-24 xl:px-32">
 
       {/* HEADER SECTION */}
@@ -18,6 +15,9 @@ export default function EcosystemSection() {
       />
 
       <div className="flex flex-col gap-16 md:gap-24 w-full max-w-7xl mx-auto">
+        {/* ... (SISA KONTEN ITEM 1 & 2 TETAP SAMA SEPERTI SEBELUMNYA) ... */}
+        {/* Copy paste bagian card Discord & Sentinel dari kode layout fix sebelumnya */}
+        
         {/* ========================================================= */}
         {/* ITEM 1: NVG (Discord)                                     */}
         {/* ========================================================= */}

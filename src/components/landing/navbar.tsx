@@ -4,19 +4,12 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 
-  Menu, 
-  X, 
-  LogIn, 
-  Globe, 
-  Home, 
-  Info, 
-  BookOpen
+  Menu, X, LogIn, Globe, Home, Info, BookOpen 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // --- TIPE DATA ---
 type Language = "ID" | "EN";
-
 type ContentData = {
   menu: { name: string; href: string; icon: React.ElementType }[];
   login: string;
@@ -33,37 +26,25 @@ export function Navbar() {
 
   React.useEffect(() => {
     setMounted(true);
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    // Ubah threshold scroll jadi 10px biar responsif lebih cepat
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleLanguage = () => setLanguage((prev) => (prev === "ID" ? "EN" : "ID"));
-  
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   // --- KONTEN BAHASA ---
   const content: Record<Language, ContentData> = {
     ID: {
-      menu: [
-        { name: "Beranda", href: "/", icon: Home },
-        { name: "Tentang", href: "/about", icon: Info },
-        { name: "Panduan", href: "/guide", icon: BookOpen },
-      ],
-      login: "Masuk",
-      ctaLogin: "Masuk",
+      menu: [ { name: "Beranda", href: "/", icon: Home }, { name: "Tentang", href: "/about", icon: Info }, { name: "Panduan", href: "/guide", icon: BookOpen } ],
+      login: "Masuk", ctaLogin: "Masuk",
     },
     EN: {
-      menu: [
-        { name: "Home", href: "/", icon: Home },
-        { name: "About", href: "/about", icon: Info },
-        { name: "Guide", href: "/guide", icon: BookOpen },
-      ],
-      login: "Login",
-      ctaLogin: "Login",
+      menu: [ { name: "Home", href: "/", icon: Home }, { name: "About", href: "/about", icon: Info }, { name: "Guide", href: "/guide", icon: BookOpen } ],
+      login: "Login", ctaLogin: "Login",
     },
   };
 
@@ -72,20 +53,22 @@ export function Navbar() {
   return (
     <>
       {/* ========================================================= */}
-      {/* 1. TOP NAVBAR CONTAINER (FOREGROUND ONLY)                 */}
+      {/* 1. TOP NAVBAR (GLASSMORPHISM MODE)                        */}
       {/* ========================================================= */}
-      {/* PERUBAHAN PENTING:
-          - Saat Menu Terbuka (isMobileMenuOpen): Header ini jadi TRANSPARAN total.
-            Tugas background diambil alih oleh Mobile Menu Wrapper di bawah.
-          - Z-Index: 101 (Agar logo & tombol tetap bisa diklik di atas background menu)
-      */}
       <header
         className={`fixed top-0 z-101 w-full transition-all duration-500 ease-in-out ${
           isMobileMenuOpen
-            ? "bg-transparent border-b border-transparent" // Transparan saat menu buka (Backdrop menu yang handle)
+            // 1. MOBILE MENU OPEN: Transparan total (biar backdrop menu yang handle)
+            ? "bg-transparent border-b border-transparent backdrop-blur-none"
             : isScrolled
-              ? "bg-[#02040a]/80 backdrop-blur-xl border-b border-white/10 shadow-md" // Normal Scroll
-              : "bg-transparent border-b border-transparent" // Top Position
+              // 2. SCROLLED: mode "Kaca Es" (Frosted Glass)
+              // - bg-white/5: Memberi tint putih sangat tipis (kaca)
+              // - backdrop-blur-xl: Efek buram yang kuat
+              // - border-white/5: Garis batas super halus
+              // - shadow-lg: Agar terpisah dari konten di bawahnya
+              ? "bg-white/2 backdrop-blur-2xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.1)] supports-backdrop-filter:bg-white/2"
+              // 3. TOP: Transparan total
+              : "bg-transparent border-b border-transparent backdrop-blur-none"
         }`}
       >
         <div className="flex h-16 w-full items-center justify-between px-6 md:px-10 lg:px-16">
@@ -115,8 +98,9 @@ export function Navbar() {
                   }`}
                 >
                   {item.name}
+                  {/* Underline Indicator */}
                   <span className={`absolute bottom-0 left-0 h-0.5 bg-indigo-500 transition-all duration-300 ${
-                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                    isActive ? "w-full shadow-[0_0_10px_rgba(99,102,241,0.5)]" : "w-0 group-hover:w-full"
                   }`} />
                 </Link>
               )
@@ -163,14 +147,8 @@ export function Navbar() {
       </header>
 
       {/* ========================================================= */}
-      {/* 2. UNIFIED MOBILE MENU & BACKDROP                         */}
+      {/* 2. UNIFIED MOBILE MENU & BACKDROP (TIDAK BERUBAH)         */}
       {/* ========================================================= */}
-      
-      {/* KUNCI PERFEKSIONIS:
-          - Wrapper ini mulai dari top-0 (BUKAN top-16).
-          - Z-Index 100 (Di bawah header yang 101, tapi di atas konten).
-          - Ini yang memberikan background kaca untuk SELURUH area (Header + Menu).
-      */}
       <div 
         className={`fixed top-0 left-0 w-full z-100 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] md:hidden ${
             isMobileMenuOpen 
@@ -178,17 +156,10 @@ export function Navbar() {
                 : "max-h-0 opacity-0"
         }`}
       >
-        {/* SINGLE GLASS LAYER
-            Opacity dikurangi ke 80% (bg-[#02040a]/80) agar lebih transparan.
-        */}
         <div className="bg-[#02040a]/80 backdrop-blur-xl border-b border-white/10 shadow-2xl pt-16"> 
-            
-            {/* CONTENT MENU (Diberi padding atas pt-4 agar tidak nempel navbar) */}
             <div className="flex flex-wrap items-center justify-center gap-2 p-5 pb-8">
-                
                 {t.menu.map((item, index) => {
                     const isActive = pathname === item.href;
-
                     return (
                         <Link 
                             key={index} 
@@ -201,7 +172,6 @@ export function Navbar() {
                             className={`
                                 flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300
                                 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}
-                                
                                 ${isActive 
                                     ? "bg-indigo-600/90 border-indigo-500 text-white cursor-default shadow-[0_0_15px_rgba(99,102,241,0.3)]" 
                                     : "bg-white/5 border-white/5 text-zinc-300 hover:bg-white/10 hover:text-white active:scale-95"
@@ -213,7 +183,6 @@ export function Navbar() {
                         </Link>
                     )
                 })}
-
                 <Link 
                     href="/login" 
                     onClick={closeMobileMenu}
@@ -226,7 +195,6 @@ export function Navbar() {
                     <span className="font-onest font-medium text-sm">{t.ctaLogin}</span>
                     <LogIn className="size-4" />
                 </Link>
-
             </div>
         </div>
       </div>

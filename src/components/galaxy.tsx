@@ -41,7 +41,7 @@ export default function GalaxyBackground() {
 
         {/* --- SHOWCASE (Section 4): BLUE ELECTRIC --- */}
         {/* Cahaya tajam di belakang code editor */}
-        <div className="absolute top-[320vh] left-[-20%] w-[90vw] h-[90vh] bg-[radial-gradient(circle,rgba(37,99,235,0.15)_0%,transparent_60%)] blur-[130px]" />
+        <div className="absolute top-[320vh] left-[-20%] w-[90vw] h-[90vh] bg-[radial-gradient(circle,rgba(37, 99, 235, 0.15)_0%,transparent_60%)] blur-[130px]" />
 
         {/* --- ARSENAL (Section 5): MAGENTA/PINK --- */}
         {/* Penutup di bawah */}

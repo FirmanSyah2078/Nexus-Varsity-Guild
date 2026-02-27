@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 // Import font dari Google (Otomatis & Gratis)
-import { 
-  Inter, 
-  EB_Garamond, 
-  Geist, 
-  Instrument_Sans, 
-  Onest, 
-  Space_Grotesk 
+import {
+  Inter,
+  EB_Garamond,
+  Geist,
+  Instrument_Sans,
+  Onest,
+  Space_Grotesk,
 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 // --- DEFINISI VARIABLE FONT ---
 
@@ -70,12 +71,12 @@ export default function RootLayout({
     <html lang="id" suppressHydrationWarning>
       <body
         className={`
-          ${inter.variable} 
-          ${ebGaramond.variable} 
-          ${geist.variable} 
-          ${instrumentSans.variable} 
-          ${onest.variable} 
-          ${spaceGrotesk.variable} 
+          ${inter.variable}
+          ${ebGaramond.variable}
+          ${geist.variable}
+          ${instrumentSans.variable}
+          ${onest.variable}
+          ${spaceGrotesk.variable}
           antialiased
         `}
       >
@@ -86,6 +87,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+
+          <Toaster theme="dark" position="top-right" richColors /> 
         </ThemeProvider>
       </body>
     </html>

@@ -11,7 +11,7 @@ export default function LandingLayout({
 }) {
   return (
     <SmoothScroller>
-      <div className="flex min-h-screen flex-col bg-background">
+      <div className="flex min-h-screen flex-col bg-[#02040a] text-white">
         {/* Navbar Fixed di atas */}
         <Navbar />
         

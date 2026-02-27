@@ -5,10 +5,112 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+// =====================================================================
+// 1. DATA MASTER (Referensi Fakultas / Universitas)
+// Tabel ini HANYA diisi oleh ADMIN atau STAFF untuk fitur Auto-Approve
+// =====================================================================
+model MasterMahasiswa {
+  nim          String   @id @unique
+  nama         String
+  emailPribadi String   @unique // Email yang digunakan untuk Auto-Approve
+  angkatan     Int
+  fakultas     String?
+  prodi        String?
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// =====================================================================
+// 2. ENUM UNTUK ROLE SISTEM
+// =====================================================================
+enum Role {
+  USER       // Role default saat pertama kali daftar (Gatekeeper)
+  MAHASISWA  // Role setelah biodata lengkap & diverifikasi (Otomatis/Manual)
+  STAFF      // Admin Fakultas (Verifikator manual, Input Master Data)
+  ADMIN      // Kamu (Root, Full Access NVI Sentinal)
+}
+
+// =====================================================================
+// 3. CORE USER MODEL (Identitas NVI Sentinal)
+// =====================================================================
+model User {
+  id            String    @id @default(cuid())
+
+  // -- Kredensial Utama (Primary Identity) --
+  email         String    @unique // Email Master (Dari pendaftaran manual atau Google)
+  emailVerified DateTime?
+  password      String?           // Bisa null kalau daftarnya via Google
+
+  // -- Biodata Mahasiswa (Akan diisi manual oleh user di Dashboard) --
+  nim           String?   @unique
+  name          String?
+  image         String?
+  fakultas      String?
+  prodi         String?
+  angkatan      Int?
+
+  // -- Status Sistem --
+  role          Role      @default(USER)
+  isVerified    Boolean   @default(false) // True jika sudah dicocokkan dengan MasterMahasiswa atau di-approve Staff
+
+  // -- Timestamps --
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // -- Relasi ke Tabel Lain --
+  accounts      Account[] // Relasi ke OAuth Providers (Discord, GitHub, Google)
+  sessions      Session[] // Relasi ke sesi login (Auth.js)
+}
+
+// =====================================================================
+// 4. OAUTH ACCOUNTS (Integrasi Sosial)
+// Auth.js (NextAuth) membutuhkan tabel ini.
+// Di sinilah Discord ID dan GitHub ID akan disimpan dan ditautkan ke User.
+// =====================================================================
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String  // "google", "discord", "github"
+  providerAccountId  String  // ID unik dari provider (misal: ID Discord)
+
+  refresh_token      String? @db.Text
+  access_token       String? @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String? @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+// =====================================================================
+// 5. SESSION & VERIFICATION TOKEN (Infrastruktur Auth.js)
+// =====================================================================
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Tabel ini digunakan untuk mengirim kode OTP / Token Lupa Password ke email
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }

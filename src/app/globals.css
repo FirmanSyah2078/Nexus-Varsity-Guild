@@ -2,7 +2,7 @@
 @plugin "tailwindcss-animate";
 
 /* --- PENTING: Custom Variant untuk Dark Mode Shadcn --- */
-@custom-variant dark (&:is(.dark *));
+/* @custom-variant dark (&:is(.dark *)); */
 
 @theme inline {
   /* --- 1. SETUP FONT USER (NVG) --- */
@@ -12,13 +12,22 @@
   --font-instrument: var(--font-instrument);
   --font-onest: var(--font-onest);
   --font-space: var(--font-space);
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Kembalikan font-mono bawaan (opsional jika pakai Geist Mono) */
-  --font-mono:
-    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, monospace;
+  /* --- 2. SETUP WARNA LAYOUT --- */
 
-  /* --- 2. MAPPING WARNA SHADCN (LENGKAP) --- */
+  /* MAPPING WARNA AUTH */
+  --color-auth-bg: var(--auth-bg);
+  --color-auth-card: var(--auth-card);
+  --color-auth-border: var(--auth-border);
+  --color-auth-title: var(--auth-title);
+  --color-auth-desc: var(--auth-desc);
+  --color-auth-accent: var(--auth-accent);
+  --color-auth-input-line: var(--auth-input-line);
+  --color-auth-social: var(--auth-social);
+  --color-auth-link: var(--auth-link);
+
+  /* MAPPING WARNA DASHBOARD */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -35,6 +44,15 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+
+  /* STATUS COLORS NVG */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -65,18 +83,23 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
-  /* 3. Definisi Blur Backdrop Custom */
+  /* Definisi Blur Backdrop Custom */
   --backdrop-blur-xs: 2px;
   --backdrop-blur-xxl: 40px;
 
-  /* --- 3. EASING CUSTOM --- */
+  /* EASING CUSTOM  */
   --transition-timing-function-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --transition-timing-function-snappy: cubic-bezier(0.2, 0.8, 0.2, 1);
   --transition-timing-function-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
   --transition-timing-function-bouncy: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  
 
-  /* --- 4. ANIMASI CUSTOM --- */
+  /* ATMOSPHERE SHADOWS */
+  --shadow-glow-primary: 0 0 8px var(--glow-primary), 0 0 24px color-mix(in oklab, var(--glow-primary) 60%, transparent);
+  --shadow-glow-accent: 0 0 8px var(--glow-accent), 0 0 24px color-mix(in oklab, var(--glow-accent) 60%, transparent);
+
+
+
+  /* --- 3. ANIMASI CUSTOM --- */
 
   /* Meteor */
   --animate-meteor: meteor 5s linear infinite;
@@ -142,6 +165,19 @@
   /* Pulse Slow */
   --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
+  /* Deep Breath (Smooth Organic Pulse) */
+  --animate-deep-breath: deep-breath 4s ease-in-out infinite;
+  @keyframes deep-breath {
+    0%, 100% {
+      opacity: 0.2;
+      box-shadow: none;
+    }
+    50% {
+      opacity: 1;
+      box-shadow: 0 0 10px var(--auth-accent);
+    }
+  }
+
   /* Twinkle (Footer Stars) */
   --animate-twinkle: twinkle 4s ease-in-out infinite;
   @keyframes twinkle {
@@ -156,16 +192,140 @@
     }
   }
 
-
+/* Beacon Flash (Data Transmission) */
+  --animate-beacon-flash: beacon-flash 2.5s ease-in-out infinite;
+  @keyframes beacon-flash {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+      box-shadow: none;
+    }
+    10% {
+      opacity: 1;
+      transform: scale(1.5);
+      box-shadow: 0 0 10px var(--auth-accent);
+    }
+    20% {
+      opacity: 0.4;
+      transform: scale(1);
+      box-shadow: none;
+    }
+    30% {
+      opacity: 1;
+      transform: scale(1.5);
+      box-shadow: 0 0 10px var(--auth-accent);
+    }
+    40%, 90% {
+      opacity: 0.4;
+      transform: scale(1);
+      box-shadow: none;
+    }
+  }
 
 }
 
-/* --- 3. CONFIG UTAMA (DEFAULT = DARK) --- */
+
+/* --- CONFIG UTAMA (DEFAULT = DARK) --- */
 :root {
   --radius: 0.625rem;
 
-  /* BASE DARK VALUES */
-  --background: oklch(0.145 0 0);
+  /* AUTH SYSTEM COLORS (LOCKED TO DARK) */
+  --auth-bg: oklch(0.145 0 0);
+  --auth-card: oklch(0.145 0 0 / 0.6);
+  --auth-border: oklch(0.269 0 0 / 0.4);
+  --auth-title: oklch(0.985 0 0);
+  --auth-desc: oklch(0.708 0 0);
+  --auth-accent: oklch(0.985 0 0);
+  --auth-input-line: oklch(0.708 0 0 / 0.4);
+  --auth-social: oklch(0.269 0 0 / 0.15);
+  --auth-link: oklch(0.708 0 0 / 0.7);
+
+  /* DASHBOARD SYSTEM COLORS */
+  /*
+     BASE DARK (Navy Charcoal – Tidak Terlalu Gelap)
+  */
+  --background: oklch(0.18 0.02 250);
+  --foreground: oklch(0.96 0.01 250);
+  --foreground-muted: oklch(0.72 0.02 250);
+
+  /*
+     SURFACE ELEVATION (Natural Depth)
+  */
+  --card: oklch(0.22 0.02 250);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.24 0.03 250);
+  --popover-foreground: var(--foreground);
+
+  /*
+     BRAND & ACTION (Electric Blue)
+  */
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.15 0.02 250);
+  --secondary: oklch(0.28 0.02 250);
+  --secondary-foreground: var(--foreground);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.15 0.02 250);
+  --muted: oklch(0.26 0.02 250);
+  --muted-foreground: var(--foreground-muted);
+
+  /*
+     STATUS COLORS (Neo System Style)
+  */
+  --success: oklch(0.75 0.16 160);
+  --success-foreground: oklch(0.12 0.02 160);
+  --warning: oklch(0.80 0.17 80);
+  --warning-foreground: oklch(0.15 0.02 80);
+  --destructive: oklch(0.65 0.20 25);
+  --destructive-foreground: oklch(0.98 0.01 25);
+  --info: oklch(0.75 0.18 210);
+  --info-foreground: oklch(0.15 0.02 210);
+
+  /*
+     UI ELEMENTS
+  */
+  --border: oklch(0.30 0.02 250);
+  --input: oklch(0.26 0.02 250);
+  --ring: var(--primary);
+
+  /*
+     HEADER & SIDEBAR
+  */
+  --header: oklch(0.17 0.02 250);
+  --header-foreground: var(--foreground);
+  --header-border: var(--border);
+  --sidebar: oklch(0.16 0.02 250);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: oklch(0.22 0.02 250);
+  --sidebar-primary-foreground: var(--foreground);
+  --sidebar-accent: oklch(0.30 0.02 250 / 0.15);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: oklch(0.60 0.10 250);
+
+  /*
+     CHART COLORS (Futuristic Harmony)
+  */
+  --chart-1: var(--primary);
+  --chart-2: var(--success);
+  --chart-3: var(--warning);
+  --chart-4: var(--accent);
+  --chart-5: var(--info);
+
+  /*
+     ATMOSPHERE (Glow & Particle)
+  */
+  --glow-primary: oklch(0.72 0.20 250);
+  --glow-accent: oklch(0.78 0.18 220);
+  --particle-color: oklch(0.75 0.15 240);
+  --grid-line: oklch(0.30 0.02 250);
+  --glass-bg: oklch(0.25 0.03 250 / 0.6);
+}
+
+/* --- FUTURE DASHBOARD THEMES --- */
+
+.dark-backup {
+/* BASE DARK VALUES */
+  --background: oklch(0.145 0 0); 
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -203,7 +363,6 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
-/* --- 4. LIGHT THEME OVERRIDE --- */
 .light {
   /* BASE LIGHT VALUES */
   --background: oklch(1 0 0);
@@ -244,7 +403,6 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-/* --- 5. FUTURE DASHBOARD THEMES --- */
 .theme-blue {
   --primary: oklch(0.488 0.243 264.376);
   --primary-foreground: oklch(0.985 0 0);
@@ -257,11 +415,28 @@
   --ring: oklch(0.645 0.246 16.439);
 }
 
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Gabungkan visual fix dan trigger animasi (autofill detection) */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    /* Trigger animasi untuk dideteksi JS */
+    animation-name: onAutoFillStart;
+
+    /* Menghilangkan background bawaan browser */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: var(--auth-title) !important;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px transparent !important;
   }
 }

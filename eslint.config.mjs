@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    
+    // TAMBAHAN: Abaikan semua file hasil generate mesin Prisma
+    "src/generated/**",
   ]),
 ]);
 

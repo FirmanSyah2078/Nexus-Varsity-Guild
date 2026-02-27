@@ -1,12 +1,12 @@
 "use client";
 
-import HeroSection from "@/components/sections/home/hero";
-import EcosystemSection from "@/components/sections/home/ecosystem";
-import FeaturesSection from "@/components/sections/home/features";
-import CodeShowcaseSection from "@/components/sections/home/showcase";
-import TechArsenalSection from "@/components/sections/home/tech-arsenal";
-import FaqSection from "@/components/sections/home/faq";
-import LaunchSection from "@/components/sections/home/launch";
+import HeroSection from "@/components/landing/sections/home/hero";
+import EcosystemSection from "@/components/landing/sections/home/ecosystem";
+import FeaturesSection from "@/components/landing/sections/home/features";
+import CodeShowcaseSection from "@/components/landing/sections/home/showcase";
+import TechArsenalSection from "@/components/landing/sections/home/tech-arsenal";
+import FaqSection from "@/components/landing/sections/home/faq";
+import LaunchSection from "@/components/landing/sections/home/launch";
 import GalaxyBackground from "@/components/galaxy";
 
 
@@ -14,7 +14,7 @@ export default function LandingPage() {
   return (
     <>
       {/* Container Utama: Hitam Pekat */}
-      <div className="relative w-full min-h-screen bg-[#02040a] text-white overflow-x-hidden">
+      <div className="relative w-full overflow-x-hidden">
 
         {/* GLOBAL ATMOSPHERE & STARS */}
         <GalaxyBackground />

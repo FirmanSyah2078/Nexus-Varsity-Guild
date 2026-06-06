@@ -1,57 +1,46 @@
-// src/app/(dashboard)/dashboard/page.tsx
+"use client"; // <--- JADIKAN CLIENT COMPONENT AGAR BISA BACA CONTEXT
 
-import { AdminDashboard } from "@/components/dashboard/admin"
-import { StaffDashboard } from "@/components/dashboard/staff"
-import { DosenDashboard } from "@/components/dashboard/dosen"
-import { MahasiswaDashboard } from "@/components/dashboard/mahasiswa"
-import { TamuDashboard } from "@/components/dashboard/tamu"
-import { UserDashboard } from "@/components/dashboard/user"
+import { useDashboard } from "@/logic/dashboard/system/context"
 
-export default async function DashboardHomePage() {
-  // =========================================================================
-  // 💡 SIMULASI SESSION (MOCK DATA)
-  // Karena backend belum jadi, ubah value "role" di bawah ini secara manual 
-  // untuk melihat perubahan halaman.
-  // Pilihan role: "admin" | "staff" | "mahasiswa" | "tamu" | "user"
-  // =========================================================================
-  
-  const mockSession = {
-    user: {
-      id: "usr_12345",
-      name: "Komandan NVI", // Ganti nama untuk ngetes sapaan
-      email: "komandan@nexusvarsity.com",
-      role: "mahasiswa",        // 👈 GANTI VALUE INI UNTUK TESTING UI
-    }
-  }
+// Import komponen UI
+import { AdminDashboard } from "@/components/dashboard/home/admin"
+import { StaffDashboard } from "@/components/dashboard/home/staff"
+import { DosenDashboard } from "@/components/dashboard/home/dosen"
+import { MahasiswaDashboard } from "@/components/dashboard/home/mahasiswa"
+import { TamuDashboard } from "@/components/dashboard/home/tamu"
+import { UserDashboard } from "@/components/dashboard/home/user"
 
-  // Tarik data user dari sesi (nanti kalau backend sudah ada,
-  // ganti bagian ini dengan fungsi fetch ke database/session)
-  const currentUser = mockSession.user
+export default function DashboardHomePage() {
+  // 1. Ambil state role aktif dari Jantung Aplikasi (Context)
+  const { activeRole } = useDashboard();
 
-  // =========================================================================
-  // 🔀 ROUTING SWITCHER BERDASARKAN ROLE
-  // =========================================================================
+  // 2. Data User Dasar
+  const baseUser = {
+    id: "usr_12345",
+    name: "Komandan NVI",
+    email: "komandan@nexusvarsity.com",
+  };
 
-  switch (currentUser.role) {
-    case "admin":
-      return <AdminDashboard user={currentUser} />
+  // 3. LOGIKA ROUTING DINAMIS BERDASARKAN NAMA ROLE DARI CONTEXT
+  // Kita mapping nama role elegan kita ("Sovereign") ke komponen UI yang sesuai
+  switch (activeRole.name) {
+    case "Sovereign":
+      return <AdminDashboard user={{ ...baseUser, role: "admin" }} />
 
-    case "staff":
-      return <StaffDashboard user={currentUser} />
+    case "Catalyst":
+      return <StaffDashboard user={{ ...baseUser, role: "staff" }} />
 
-    case "mahasiswa":
-      return <MahasiswaDashboard user={currentUser} />
+    case "Vanguard":
+      return <MahasiswaDashboard user={{ ...baseUser, role: "mahasiswa" }} />
 
-    case "dosen":
-      return <DosenDashboard user={currentUser} />
+    case "Praeceptor":
+      return <DosenDashboard user={{ ...baseUser, role: "dosen" }} />
 
-    case "tamu":
-      return <TamuDashboard user={currentUser} />
+    case "Wayfarer":
+      return <TamuDashboard user={{ ...baseUser, role: "tamu" }} />
 
-    case "user":
     default:
-      // Tampilan default/fallback jika role tidak dikenali atau masih "user" biasa
-      // yang belum melengkapi biodata.
-      return <UserDashboard user={currentUser} />
+      // Fallback jika belum verifikasi biodata
+      return <UserDashboard user={{ ...baseUser, role: "user" }} />
   }
 }

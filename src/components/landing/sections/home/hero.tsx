@@ -87,7 +87,7 @@ export default function HeroSection() {
               // - Padding: Disesuaikan biar ga terlalu lebar (px-8 cukup)
               className="h-9 sm:h-10 md:h-11 lg:h-12
                  px-4 sm:px-5 md:px-6 lg:px-8
-                 rounded-full border-white/10 bg-white/5 backdrop-blur-sm text-white/90
+                 rounded-full border-white/10 bg-white/5 backdrop-blur-sm text-white/90 hover:text-white
                  hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300
                  font-onest font-medium"
             >

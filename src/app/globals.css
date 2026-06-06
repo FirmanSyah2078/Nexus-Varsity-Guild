@@ -99,7 +99,7 @@
 
 
 
-  /* --- 3. ANIMASI CUSTOM --- */
+  /* --- ANIMASI CUSTOM --- */
 
   /* Meteor */
   --animate-meteor: meteor 5s linear infinite;
@@ -192,7 +192,7 @@
     }
   }
 
-/* Beacon Flash (Data Transmission) */
+  /* Beacon Flash (Data Transmission) */
   --animate-beacon-flash: beacon-flash 2.5s ease-in-out infinite;
   @keyframes beacon-flash {
     0%, 100% {
@@ -225,11 +225,13 @@
 }
 
 
-/* --- CONFIG UTAMA (DEFAULT = DARK) --- */
+/* --- CONFIG UTAMA (DEFAULT) --- */
 :root {
   --radius: 0.625rem;
 
-  /* AUTH SYSTEM COLORS (LOCKED TO DARK) */
+  /*
+    VARIABEL AUTH (LOCKED TO DARK)
+  */
   --auth-bg: oklch(0.145 0 0);
   --auth-card: oklch(0.145 0 0 / 0.6);
   --auth-border: oklch(0.269 0 0 / 0.4);
@@ -240,7 +242,89 @@
   --auth-social: oklch(0.269 0 0 / 0.15);
   --auth-link: oklch(0.708 0 0 / 0.7);
 
+
   /* DASHBOARD SYSTEM COLORS */
+  /*
+    DASHBOARD BASE LIGHT (WARNA NETRAL/PUTIH)
+  */
+  --background: oklch(0.98 0.01 250);        /* Latar belakang utama halaman (Abu-abu kebiruan sangat terang) */
+  --foreground: oklch(0.18 0.02 250);        /* Warna teks utama paragraf dan judul (Gelap solid) */
+  --foreground-muted: oklch(0.45 0.02 250);  /* Warna teks redup/keterangan tambahan */
+
+  /*
+    DASHBOARD CARDS & POPOVERS (LIGHT)
+  */
+  --card: oklch(1 0 0);                    /* Background kotak konten/card (Putih bersih) */
+  --card-foreground: var(--foreground);      /* Teks di dalam kotak konten */
+  --popover: oklch(1 0 0);                 /* Background menu dropdown/tooltip */
+  --popover-foreground: var(--foreground);   /* Teks di dalam menu dropdown */
+
+  /*
+    DASHBOARD ACTION COLORS (LIGHT)
+  */
+  --primary: oklch(0.205 0 0);                  /* Warna tombol utama  */
+  --primary-foreground: oklch(0.985 0 0);       /* Warna teks di dalam tombol utama (Putih) */
+  --secondary: oklch(0.95 0.02 250);            /* Warna tombol sekunder (Abu-abu terang) */
+  --secondary-foreground: oklch(0.20 0.02 250); /* Warna teks di tombol sekunder */
+  --accent: oklch(0.95 0.02 250);               /* Latar belakang item saat di-hover (misal list dropdown) */
+  --accent-foreground: oklch(0.20 0.02 250);    /* Warna teks item saat di-hover */
+  --muted: oklch(0.95 0.02 250);                /* Area yang di-disable atau non-aktif */
+  --muted-foreground: var(--foreground-muted);    /* Teks pada area non-aktif */
+
+  /*
+    UI ELEMENTS
+  */
+  --border: oklch(0.90 0.02 250);            /* Garis tepi standar untuk tabel dan pemisah */
+  --input: oklch(0.90 0.02 250);             /* Garis tepi untuk input form teks */
+  --ring: var(--primary);                      /* Cincin fokus (outline) saat elemen diklik/di-tab */
+
+  /*
+    DASHBOARD HEADER & SIDEBAR (LIGHT)
+  */
+  --header: oklch(1 0 0);                                /* Background navigasi atas (Putih) */
+  --header-foreground: var(--foreground);                  /* Teks di navigasi atas */
+  --header-border: var(--border);                          /* Garis pemisah bawah navigasi atas */
+
+  --sidebar: oklch(0.97 0.01 250);                       /* Background menu samping (Sedikit abu-abu agar beda dengan card) */
+  --sidebar-foreground: var(--foreground);               /* Teks menu samping */
+  --sidebar-primary: var(--primary);                       /* Ikon/Teks menu yang sedang aktif */
+  --sidebar-primary-foreground: var(--primary-foreground); /* Teks di dalam blok menu aktif */
+  --sidebar-accent: oklch(0.92 0.02 250);                /* Background menu saat kursor melayang (hover) */
+  --sidebar-accent-foreground: var(--foreground);          /* Teks menu saat di-hover */
+  --sidebar-border: var(--border);                         /* Garis pembatas sidebar dengan konten utama */
+  --sidebar-ring: var(--ring);                             /* Efek fokus pada elemen dalam sidebar */
+
+  /*
+    SYSTEM STATUS & CHARTS (LIGHT)
+  */
+  --success: oklch(0.65 0.15 160);           /* Hijau - Notifikasi berhasil */
+  --success-foreground: oklch(1 0 0);        /* Teks di dalam box hijau */
+  --warning: oklch(0.75 0.15 80);            /* Kuning/Orange - Peringatan */
+  --warning-foreground: oklch(0.15 0 0);     /* Teks di dalam box kuning */
+  --destructive: oklch(0.60 0.20 25);        /* Merah - Error/Hapus (Sistem Shadcn) */
+  --destructive-foreground: oklch(1 0 0);    /* Teks di tombol hapus */
+  --info: oklch(0.60 0.15 250);              /* Biru Info - Pemberitahuan netral */
+  --info-foreground: oklch(1 0 0);           /* Teks di dalam box info */
+
+  --chart-1: oklch(0.60 0.15 250);           /* Grafik bar 1 */
+  --chart-2: oklch(0.65 0.15 160);           /* Grafik bar 2 */
+  --chart-3: oklch(0.75 0.15 80);            /* Grafik bar 3 */
+  --chart-4: oklch(0.60 0.20 25);            /* Grafik bar 4 */
+  --chart-5: oklch(0.50 0.15 300);           /* Grafik bar 5 */
+
+  /*
+    ATMOSPHERE (Glow & Particle)
+  */
+  --glow-primary: oklch(0.72 0.20 250);      /* Efek cahaya pendaran utama */
+  --glow-accent: oklch(0.78 0.18 220);       /* Efek cahaya pendaran sekunder */
+  --particle-color: oklch(0.75 0.15 240);    /* Warna titik partikel animasi */
+  --grid-line: oklch(0.90 0.02 250);         /* Garis grid background arsitektur */
+  --glass-bg: oklch(1 0 0 / 0.6);            /* Efek kaca (blur) untuk elemen light */
+}
+
+/* --- FUTURE DASHBOARD THEMES --- */
+
+.navy {
   /*
      BASE DARK (Navy Charcoal – Tidak Terlalu Gelap)
   */
@@ -300,7 +384,7 @@
   --sidebar-accent: oklch(0.30 0.02 250 / 0.15);
   --sidebar-accent-foreground: var(--foreground);
   --sidebar-border: var(--border);
-  --sidebar-ring: oklch(0.60 0.10 250);
+  --sidebar-ring: var(--ring);
 
   /*
      CHART COLORS (Futuristic Harmony)
@@ -321,9 +405,7 @@
   --glass-bg: oklch(0.25 0.03 250 / 0.6);
 }
 
-/* --- FUTURE DASHBOARD THEMES --- */
-
-.dark-backup {
+.dark {
 /* BASE DARK VALUES */
   --background: oklch(0.145 0 0); 
   --foreground: oklch(0.985 0 0);
@@ -349,7 +431,7 @@
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-4: oklch(0.627 0.265 39);
   --chart-5: oklch(0.645 0.246 16.439);
 
   /* SIDEBAR DARK VALUES */
@@ -367,12 +449,15 @@
   /* BASE LIGHT VALUES */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+  
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
+
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
+
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);

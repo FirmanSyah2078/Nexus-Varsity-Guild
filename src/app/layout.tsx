@@ -82,9 +82,10 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
+          defaultTheme="navy"
+          enableSystem={true}
           disableTransitionOnChange
+          themes={["light", "dark", "navy", "theme-blue", "theme-rose"]}
         >
           {children}
 

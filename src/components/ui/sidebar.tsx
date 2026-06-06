@@ -266,7 +266,14 @@ function SidebarTrigger({
       data-slot="sidebar-trigger"
       variant="ghost"
       size="icon"
-      className={cn("size-7", className)}
+      className={cn(
+        "size-7",
+        // 1. Kunci warna dasar sesuai teks sidebar
+        "text-sidebar-foreground", 
+        // 2. Kunci warna hover agar SETEMA mutlak dengan menu sidebar
+        "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+        className
+      )}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
